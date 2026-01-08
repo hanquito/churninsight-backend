@@ -22,12 +22,22 @@ public class PrediccionService {
 
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Cliente no encontrado con id: " + id));
+                        new EntityNotFoundException(
+                                "Cliente no encontrado con id: " + id));
 
+        // 1️⃣ Calcular probabilidad
         double probabilidad =
                 modeloChurnService.calcularProbabilidadCancelacion(cliente);
 
-        String prevision = probabilidad >= 0.6
+        // 2️⃣ Determinar churn
+        boolean churn = probabilidad >= 0.6;
+
+        // 3️⃣ Guardar el resultado en el cliente (opcional pero recomendado)
+        cliente.setChurn(churn);
+        clienteRepository.save(cliente);
+
+        // 4️⃣ Mensaje humano
+        String prevision = churn
                 ? "Va a cancelar"
                 : "No va a cancelar";
 

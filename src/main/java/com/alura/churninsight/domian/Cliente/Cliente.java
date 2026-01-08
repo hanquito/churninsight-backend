@@ -36,10 +36,13 @@ public class Cliente {
     private Integer soporteTickets;
 
     @Column(nullable = false)
-    private String cambioPlan;
+    private Boolean cambioPlan;
 
     @Column(nullable = false)
-    private String pagoAutomatico;
+    private Boolean pagoAutomatico;
+
+    @Column(nullable = false)
+    private Boolean churn;
 
 
 

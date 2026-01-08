@@ -21,11 +21,14 @@ public record ClienteDatos(
         @NotNull @Min(0)
         Integer soporteTickets,
 
-        @NotBlank
-        String cambioPlan,
+        @NotNull
+        Boolean cambioPlan,
 
-        @NotBlank
-        String pagoAutomatico
+        @NotNull
+        Boolean pagoAutomatico,
+
+        @NotNull
+        Boolean churn
 
 
 
