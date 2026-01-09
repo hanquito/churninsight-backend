@@ -1,7 +1,7 @@
 package com.alura.churninsight.domian.Prediccion;
 
 public record ResultadoPrediccion(
-        String prevision,
+        boolean churn,
         double probabilidad
 ) {
 }

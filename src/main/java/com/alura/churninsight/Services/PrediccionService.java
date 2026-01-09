@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PrediccionService {
+
     private final ClienteRepository clienteRepository;
     private final ModeloChurnService modeloChurnService;
 
@@ -32,15 +33,14 @@ public class PrediccionService {
         // 2️⃣ Determinar churn
         boolean churn = probabilidad >= 0.6;
 
-        // 3️⃣ Guardar el resultado en el cliente (opcional pero recomendado)
+        // 3️⃣ Guardar churn en la BD
         cliente.setChurn(churn);
         clienteRepository.save(cliente);
 
-        // 4️⃣ Mensaje humano
-        String prevision = churn
-                ? "Va a cancelar"
-                : "No va a cancelar";
-
-        return new ResultadoPrediccion(prevision, probabilidad);
+        // 4️⃣ Respuesta limpia
+        return new ResultadoPrediccion(
+                churn,
+                probabilidad
+        );
     }
 }
